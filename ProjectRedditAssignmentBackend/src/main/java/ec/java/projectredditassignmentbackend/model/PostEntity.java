@@ -1,5 +1,6 @@
 package ec.java.projectredditassignmentbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,5 @@ public class PostEntity {
 
     private String title, content;
     private int points;
-    private UserEntity user;
 
 }
