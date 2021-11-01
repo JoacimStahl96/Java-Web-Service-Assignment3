@@ -17,8 +17,7 @@ public class PostService {
     }
 
     public PostEntity createPost(PostEntity post, UserEntity user){
-        if (postRepository.createPost(post) != null){
-            user.getPosts().add(post);
+        if (postRepository.createPost(post, user) != null){
             return new PostEntity(post.getTitle(), post.getContent(), post.getPoints());
         } else {
             return null;
@@ -29,15 +28,15 @@ public class PostService {
         return postRepository.getAllPosts();
     }
 
-    public boolean deletePost(PostEntity post){
-        String title = post.getTitle().toLowerCase();
+    public boolean deletePost(String post){
+        String title = post.toLowerCase();
         PostEntity entity = postRepository.getSpecificPost(post);
+
         if (title.equals(entity.getTitle())){
             postRepository.removePost(title);
             return true;
         } else {
             return false;
         }
-
     }
 }

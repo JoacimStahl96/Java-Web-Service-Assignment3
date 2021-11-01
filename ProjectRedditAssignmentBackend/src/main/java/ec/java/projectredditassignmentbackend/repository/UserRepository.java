@@ -1,5 +1,6 @@
 package ec.java.projectredditassignmentbackend.repository;
 
+import ec.java.projectredditassignmentbackend.model.PostEntity;
 import ec.java.projectredditassignmentbackend.model.UserEntity;
 import org.springframework.stereotype.Repository;
 
@@ -22,5 +23,11 @@ public class UserRepository {
 
     public UserEntity getUser(String username){
         return users.get(username.toLowerCase());
+    }
+
+    public void removePost(String username, PostEntity title){
+       UserEntity user = getUser(username);
+
+       user.getPosts().remove(title);
     }
 }

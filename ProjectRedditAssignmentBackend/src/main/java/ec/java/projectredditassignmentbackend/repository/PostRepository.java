@@ -13,15 +13,15 @@ public class PostRepository {
 
     private final Map<String, PostEntity> posts = new HashMap<>();
 
-    public PostEntity createPost(PostEntity post){
-
+    public PostEntity createPost(PostEntity post, UserEntity user){
+        user.getPosts().add(post);
         return posts.put(post.getTitle().toLowerCase(), post);
     }
 
-    public PostEntity getSpecificPost(PostEntity post){
-      PostEntity entity = posts.get(post.getTitle().toLowerCase());
+    public PostEntity getSpecificPost(String post){
+      PostEntity entity = posts.get(post.toLowerCase());
         if (entity != null){
-            return posts.get(post.getTitle().toLowerCase());
+            return posts.get(post);
         } else {
             return null;
         }

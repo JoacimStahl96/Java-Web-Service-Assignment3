@@ -1,6 +1,8 @@
 package ec.java.projectredditassignmentbackend.service;
 
+import ec.java.projectredditassignmentbackend.model.PostEntity;
 import ec.java.projectredditassignmentbackend.model.UserEntity;
+import ec.java.projectredditassignmentbackend.repository.PostRepository;
 import ec.java.projectredditassignmentbackend.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +14,13 @@ import java.util.UUID;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PostRepository postRepository;
 
     private final Map<String, UserEntity> loginTokens = new HashMap<>();
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PostRepository postRepository) {
         this.userRepository = userRepository;
+        this.postRepository = postRepository;
     }
 
     public boolean createUser(UserEntity user){
@@ -40,9 +44,17 @@ public class UserService {
         loginTokens.remove(token);
     }
 
-
     public UserEntity validate(String token){
         return loginTokens.get(token);
+    }
+
+    public boolean removePost(String username, String title){
+        if (username == null || title == null ){
+            return false;
+        }
+        PostEntity post = postRepository.getSpecificPost(title);
+        userRepository.removePost(username, post);
+        return true;
     }
 
 }

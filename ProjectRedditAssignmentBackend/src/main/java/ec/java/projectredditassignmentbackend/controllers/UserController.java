@@ -40,7 +40,6 @@ public class UserController {
 
     @PostMapping("/logout")
     public void logoutUser(@RequestHeader String token){
-        System.out.println("Token: " + token);
         userService.logoutUser(token);
 
     }
