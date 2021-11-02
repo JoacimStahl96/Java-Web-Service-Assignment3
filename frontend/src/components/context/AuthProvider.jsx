@@ -2,7 +2,7 @@ import React, { createContext, useState } from "react";
 
 export const AppContext = createContext();
 
-const AppProvider = ({ children }) => {
+const AuthProvider = ({ children }) => {
 	const [globalToken, setGlobalToken] = useState("");
 	const [authenticated, setAuthenticated] = useState(false);
 	const [globalUsername, setGlobalUsername] = useState("");
@@ -24,3 +24,4 @@ const AppProvider = ({ children }) => {
 		</div>
 	);
 };
+export default AuthProvider;

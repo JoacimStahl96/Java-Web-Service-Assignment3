@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
-import { AppContext } from "../Context/AuthProvider";
+import { AppContext } from "../context/AuthProvider";
 
-export const UnPrivate = ({ component: Component, ...rest }) => {
+const NonPrivateRoutes = ({ component: Component, ...rest }) => {
 	const { authenticated } = useContext(AppContext);
 
 	return (
@@ -12,7 +12,7 @@ export const UnPrivate = ({ component: Component, ...rest }) => {
 				if (authenticated) {
 					return (
 						<Redirect
-							to={{ pathname: "/posts", state: { froms: props.location } }}
+							to={{ pathname: "/", state: { froms: props.location } }}
 						/>
 					);
 				}
@@ -21,3 +21,4 @@ export const UnPrivate = ({ component: Component, ...rest }) => {
 		/>
 	);
 };
+export default NonPrivateRoutes;

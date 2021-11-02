@@ -1,34 +1,22 @@
-import React, { useContext } from "react";
-import { AppContext } from "../context/AuthProvider";
+import React from "react";
 import { useHistory } from "react-router-dom";
 
 const Navbar = () => {
-	const { authenticated, setAuthenticated } = useContext(AppContext);
 	let history = useHistory();
 
-	const handleLogin = () => {
-		return (
-			<button
-				onClick={() => setAuthenticated(false)}
-				style={{ float: "right" }}
-			>
-				Log out
-			</button>
-		);
-	};
-
-	const routeToLogin = () => {
+	const goToLogin = () => {
 		history.push("/login");
 	};
 
-	const handleLogout = () => {
-		return (
-			<button onClick={routeToLogin} style={{ float: "right" }}>
-				Log in
-			</button>
-		);
+	const goToRegister = () => {
+		history.push("/register");
 	};
 
-	return <div>{authenticated ? handleLogout : handleLogin}</div>;
+	return (
+		<div style={{ position: "fixed", top: "0", right: "0" }}>
+			<button onClick={goToLogin}>Log in</button>
+			<button onClick={goToRegister}>Register</button>
+		</div>
+	);
 };
 export default Navbar;

@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
-import { AppContext } from "../Context/AuthProvider";
+import { AppContext } from "../context/AuthProvider";
 
-export const PrivateRoutes = ({ component: Component, ...rest }) => {
+const PrivateRoutes = ({ component: Component, ...rest }) => {
 	const { authenticated } = useContext(AppContext);
 
 	return (
@@ -12,7 +12,7 @@ export const PrivateRoutes = ({ component: Component, ...rest }) => {
 				if (!authenticated) {
 					return (
 						<Redirect
-							to={{ pathname: "/", state: { froms: props.location } }}
+							to={{ pathname: "/posts", state: { froms: props.location } }}
 						/>
 					);
 				}
@@ -21,3 +21,4 @@ export const PrivateRoutes = ({ component: Component, ...rest }) => {
 		/>
 	);
 };
+export default PrivateRoutes;

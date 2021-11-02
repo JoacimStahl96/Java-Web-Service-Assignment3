@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const Register = () => {
 	const [user, setUser] = useState({ username: "", password: "" });
 	const [message, setMessage] = useState("");
+	let history = useHistory();
 
 	const changeUserData = (e) => {
 		setUser({ ...user, [e.target.name]: e.target.value });
@@ -12,7 +14,7 @@ const Register = () => {
 		e.preventDefault();
 
 		const response = await fetch("/user/register", {
-			method: "PUT",
+			method: "POST",
 			body: JSON.stringify(user),
 			headers: {
 				"Content-Type": "application/json",
@@ -22,6 +24,9 @@ const Register = () => {
 
 		console.log(data);
 		setMessage(data);
+		if (response.status === 201) {
+			history.push("/login");
+		}
 	};
 
 	return (

@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PostEntity {
 
-    private String title, content;
+    private String title, content, username;
     private int points;
 
 }

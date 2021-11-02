@@ -18,7 +18,7 @@ public class PostService {
 
     public PostEntity createPost(PostEntity post, UserEntity user){
         if (postRepository.createPost(post, user) != null){
-            return new PostEntity(post.getTitle(), post.getContent(), post.getPoints());
+            return new PostEntity(post.getTitle(), post.getContent(), post.getUsername(), post.getPoints());
         } else {
             return null;
         }

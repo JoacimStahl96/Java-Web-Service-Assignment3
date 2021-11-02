@@ -1,23 +1,15 @@
 import React, { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
-import { AppContext } from "../Context/AuthProvider";
+import { AppContext } from "../context/AuthProvider";
 
 const Login = () => {
-	const [usernameState, setUsernameState] = useState("");
-	const [passwordState, setPasswordState] = useState("");
+	const [user, setUser] = useState({ username: "", password: "" });
 	const [message, setMessage] = useState("");
 	const { setAuthenticated, setGlobalToken, setGlobalUsername } = useContext(
 		AppContext
 	);
 
-	let history = useHistory();
-
-	const changeUsername = (e) => {
-		setUsernameState(e.target.value);
-	};
-
-	const changePassword = (e) => {
-		setPasswordState(e.target.value);
+	const changeUserData = (e) => {
+		setUser({ ...user, [e.target.name]: e.target.value });
 	};
 
 	const loginUserHandler = (e) => {
@@ -25,9 +17,9 @@ const Login = () => {
 		const loginUser = async () => {
 			const response = await fetch("/user/login", {
 				method: "POST",
+				body: JSON.stringify(user),
 				headers: {
-					username: usernameState,
-					password: passwordState,
+					"Content-Type": "application/json",
 				},
 			});
 
@@ -37,9 +29,9 @@ const Login = () => {
 			if (response.status !== 406 && response.status === 200) {
 				const data = await response.text();
 				setGlobalToken(data);
+				console.log("user.username", user.username);
 				setAuthenticated(true);
-				setGlobalUsername(usernameState);
-				history.push("/products");
+				setGlobalUsername(user.username);
 			}
 		};
 		loginUser();
@@ -54,13 +46,13 @@ const Login = () => {
 					type="text"
 					name="username"
 					placeholder="Username"
-					onChange={changeUsername}
+					onChange={changeUserData}
 				/>
 				<input
 					type="password"
 					name="password"
 					placeholder="Password"
-					onChange={changePassword}
+					onChange={changeUserData}
 				/>
 				<button type="submit">Submit</button>
 			</form>
