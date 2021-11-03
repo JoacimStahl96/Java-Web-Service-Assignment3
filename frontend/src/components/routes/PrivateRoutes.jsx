@@ -12,7 +12,7 @@ const PrivateRoutes = ({ component: Component, ...rest }) => {
 				if (!authenticated) {
 					return (
 						<Redirect
-							to={{ pathname: "/posts", state: { froms: props.location } }}
+							to={{ pathname: "/", state: { froms: props.location } }}
 						/>
 					);
 				}

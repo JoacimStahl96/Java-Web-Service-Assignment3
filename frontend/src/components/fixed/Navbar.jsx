@@ -5,15 +5,15 @@ const Navbar = () => {
 	let history = useHistory();
 
 	const goToLogin = () => {
-		history.push("/login");
+		history.push("/r/login");
 	};
 
 	const goToRegister = () => {
-		history.push("/register");
+		history.push("/r/register");
 	};
 
 	return (
-		<div style={{ position: "fixed", top: "0", right: "0" }}>
+		<div style={{ position: "fixed", top: "0", right: "50px" }}>
 			<button onClick={goToLogin}>Log in</button>
 			<button onClick={goToRegister}>Register</button>
 		</div>

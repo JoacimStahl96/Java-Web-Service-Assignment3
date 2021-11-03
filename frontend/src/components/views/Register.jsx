@@ -25,7 +25,7 @@ const Register = () => {
 		console.log(data);
 		setMessage(data);
 		if (response.status === 201) {
-			history.push("/login");
+			history.push("/r/login");
 		}
 	};
 

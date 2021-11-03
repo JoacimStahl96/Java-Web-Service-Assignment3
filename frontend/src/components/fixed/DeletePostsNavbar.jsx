@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { AppContext } from "../context/AuthProvider";
 import { useHistory } from "react-router-dom";
 
-const AuthenticatedNavbar = () => {
+const DeletePostsNavbar = () => {
 	const {
 		setAuthenticated,
 		setGlobalUsername,
@@ -10,6 +10,10 @@ const AuthenticatedNavbar = () => {
 		globalToken,
 	} = useContext(AppContext);
 	let history = useHistory();
+
+	const routeToAllPosts = () => {
+		history.push("/r/posts");
+	};
 
 	const routeToLogin = () => {
 		const logOutUser = async () => {
@@ -23,10 +27,6 @@ const AuthenticatedNavbar = () => {
 			}
 		};
 		logOutUser();
-	};
-
-	const routeToUsersOwnPosts = () => {
-		history.push("/r/users-posts");
 	};
 
 	if (globalToken === "") {
@@ -46,9 +46,9 @@ const AuthenticatedNavbar = () => {
 					padding: 0,
 					border: "none",
 				}}
-				onClick={routeToUsersOwnPosts}
+				onClick={routeToAllPosts}
 			>
-				Watch your own posts here
+				Go back to all posts
 			</button>
 			<button
 				onClick={routeToLogin}
@@ -59,4 +59,4 @@ const AuthenticatedNavbar = () => {
 		</div>
 	);
 };
-export default AuthenticatedNavbar;
+export default DeletePostsNavbar;

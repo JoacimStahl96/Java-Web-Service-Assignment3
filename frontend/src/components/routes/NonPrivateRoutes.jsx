@@ -12,7 +12,7 @@ const NonPrivateRoutes = ({ component: Component, ...rest }) => {
 				if (authenticated) {
 					return (
 						<Redirect
-							to={{ pathname: "/", state: { froms: props.location } }}
+							to={{ pathname: "/r/posts", state: { froms: props.location } }}
 						/>
 					);
 				}

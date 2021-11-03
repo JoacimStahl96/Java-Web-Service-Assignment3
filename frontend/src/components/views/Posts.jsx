@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Header from "../fixed/Header";
 
 const Posts = () => {
 	const [post, setPost] = useState([]);
@@ -17,9 +18,7 @@ const Posts = () => {
 
 	return (
 		<div>
-			<div style={{ textAlign: "center", marginTop: "40px" }}>
-				tjenare nonprivate posts
-			</div>
+			<Header />
 			<ul style={{ listStyle: "none" }}>
 				{post.map((posts, index) => {
 					return (
